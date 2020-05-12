@@ -31,7 +31,7 @@ export type PersistConfig = {
 
 export type PersistorOptions = {
   enhancer?: Function,
-  manualPersist?: boolean
+  manualPersist?: boolean,
 }
 
 export type Storage = {
@@ -40,8 +40,12 @@ export type Storage = {
   removeItem: (string, ?() => any) => any,
 }
 
+export type MigrationFunction = PersistedState =>
+  | PersistedState
+  | Promise<PersistedState>
+
 export type MigrationManifest = {
-  [number | string]: (PersistedState) => PersistedState,
+  [number | string]: MigrationFunction,
 }
 
 export type Transform = {
